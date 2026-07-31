@@ -1,0 +1,511 @@
+{
+    "global": {
+        "filter_useless_events_from_specific_devices": false
+    },
+    "machine_specific": {
+        "krbn-91930a27-b0bb-4df7-9805-eb1a16e14632": {
+            "external_editor_path": "/Applications/Visual Studio Code.app"
+        }
+    },
+    "profiles": [
+        {
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "Cmd+Option+Links → Fenster linke Bildschirmhälfte",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "left_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command",
+                                            "left_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript -l JavaScript -e \"ObjC.import('Cocoa'); var se = Application('System Events'); var vf = \\$.NSScreen.mainScreen.visibleFrame; var ff = \\$.NSScreen.mainScreen.frame; var x = vf.origin.x; var y = ff.size.height - (vf.origin.y + vf.size.height); var w = vf.size.width; var h = vf.size.height; var app = se.applicationProcesses.where({frontmost:true})[0]; var win = app.windows[0]; win.position = [x, y]; win.size = [w/2, h];\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Cmd+Option+Rechts → Fenster rechte Bildschirmhälfte",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "right_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command",
+                                            "left_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript -l JavaScript -e \"ObjC.import('Cocoa'); var se = Application('System Events'); var vf = \\$.NSScreen.mainScreen.visibleFrame; var ff = \\$.NSScreen.mainScreen.frame; var x = vf.origin.x; var y = ff.size.height - (vf.origin.y + vf.size.height); var w = vf.size.width; var h = vf.size.height; var app = se.applicationProcesses.where({frontmost:true})[0]; var win = app.windows[0]; win.position = [x + w/2, y]; win.size = [w/2, h];\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Cmd+Option+C → Fenster zentriert, 80% Größe",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command",
+                                            "left_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript -l JavaScript -e \"ObjC.import('Cocoa'); var se = Application('System Events'); var vf = \\$.NSScreen.mainScreen.visibleFrame; var ff = \\$.NSScreen.mainScreen.frame; var x = vf.origin.x; var y = ff.size.height - (vf.origin.y + vf.size.height); var w = vf.size.width; var h = vf.size.height; var scale = 0.8; var nw = w * scale; var nh = h * scale; var app = se.applicationProcesses.where({frontmost:true})[0]; var win = app.windows[0]; win.position = [x + (w - nw)/2, y + (h - nh)/2]; win.size = [nw, nh];\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Cmd+Option+Shift+C → Fenster zentriert, 50% Größe",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command",
+                                            "left_option",
+                                            "left_shift"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript -l JavaScript -e \"ObjC.import('Cocoa'); var se = Application('System Events'); var vf = \\$.NSScreen.mainScreen.visibleFrame; var ff = \\$.NSScreen.mainScreen.frame; var x = vf.origin.x; var y = ff.size.height - (vf.origin.y + vf.size.height); var w = vf.size.width; var h = vf.size.height; var scale = 0.5; var nw = w * scale; var nh = h * scale; var app = se.applicationProcesses.where({frontmost:true})[0]; var win = app.windows[0]; win.position = [x + (w - nw)/2, y + (h - nh)/2]; win.size = [nw, nh];\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Option+W → Vivaldi starten",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a Vivaldi"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Hyperkey + B -> Bluetooth an & LG Anlage verbinden",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "b",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command",
+                                            "left_control",
+                                            "left_option",
+                                            "left_shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "/opt/homebrew/bin/blueutil --power 1 && sleep 1 && /opt/homebrew/bin/BluetoothConnector --connect '80-5B-65-B9-2E-E7'"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Cmd + 2x Leertaste -> Letztes Programm",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "double_space_active",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "double_space_active",
+                                            "value": 0
+                                        }
+                                    },
+                                    {
+                                        "key_code": "tab",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "double_space_active",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_delayed_action": {
+                                    "to_if_canceled": [
+                                        {
+                                            "set_variable": {
+                                                "name": "double_space_active",
+                                                "value": 0
+                                            }
+                                        }
+                                    ],
+                                    "to_if_invoked": [
+                                        {
+                                            "set_variable": {
+                                                "name": "double_space_active",
+                                                "value": 0
+                                            }
+                                        }
+                                    ]
+                                },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "eval_js": "// JavaScript must be written in ECMAScript 5.1.\n\nfunction main() {\n  const apps = [\n    { key_code: '1', app: 'com.vivaldi.Vivaldi' },\n    { key_code: '2', app: 'com.apple.TextEdit' },\n    { key_code: '3', app: 'com.apple.ActivityMonitor' },\n  ]\n\n  const manipulators = []\n  for (var i = 0; i < apps.length; ++i) {\n    const app = apps[i]\n\n    console.log('left_option+' + app.key_code + ' to ' + app.app)\n\n    manipulators.push({\n      type: 'basic',\n      from: {\n        key_code: app.key_code,\n        modifiers: {\n          mandatory: ['left_option'],\n        },\n      },\n      to: [\n        {\n          software_function: {\n            open_application: { bundle_identifier: app.app },\n          },\n        },\n      ],\n    })\n  }\n\n  return {\n    description: 'Open apps with left_option 1/2/3',\n    manipulators: manipulators,\n  }\n}\n\nmain()\n"
+                    },
+                    {
+                        "description": "This rule solves a problem with the Microsoft Surface Ergonomic Keyboard. The `Fn` key can't be used to start dictation, since it only toggles an internal state on and off, and it does not actually send any keypress event. This rule allows you to start dictation by double tapping the keypad enter key, which will send Fn twice. If you only press the keypad enter key once, it will send the original enter key after a short delay (250ms).",
+                        "enabled": false,
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "keypad_enter pressed",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "keypad_enter",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "fn"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "keypad_enter",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "parameters": {
+                                    "basic.to_delayed_action_delay_milliseconds": 250
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "keypad_enter pressed",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
+                                        "key_code": "fn"
+                                    }
+                                ],
+                                "to_delayed_action": {
+                                    "to_if_canceled": [
+                                        {
+                                            "set_variable": {
+                                                "name": "keypad_enter pressed",
+                                                "value": 0
+                                            }
+                                        }
+                                    ],
+                                    "to_if_invoked": [
+                                        {
+                                            "set_variable": {
+                                                "name": "keypad_enter pressed",
+                                                "value": 0
+                                            }
+                                        },
+                                        {
+                                            "key_code": "keypad_enter"
+                                        }
+                                    ]
+                                },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Change caps_lock to command+control+option+shift.",
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": [
+                                            "left_command",
+                                            "left_control",
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Cmd+Option+P → Fenster anheften (BTT Pin/Unpin Float on Top)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command",
+                                            "left_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open 'btt://trigger_named/?trigger_name=pin_window_toggle'"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "devices": [
+                {
+                    "fn_function_keys": [
+                        {
+                            "from": {
+                                "key_code": "f1"
+                            },
+                            "to": [
+                                {
+                                    "consumer_key_code": "dictation"
+                                }
+                            ]
+                        }
+                    ],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 13330,
+                        "vendor_id": 14
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "right_control"
+                            },
+                            "to": [
+                                {
+                                    "apple_vendor_top_case_key_code": "keyboard_fn"
+                                }
+                            ]
+                        }
+                    ],
+                    "treat_as_built_in_keyboard": true
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 64112,
+                        "vendor_id": 9639
+                    },
+                    "ignore": true,
+                    "ignore_vendor_events": true,
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "end"
+                            },
+                            "to": [
+                                {
+                                    "apple_vendor_top_case_key_code": "keyboard_fn"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 11403,
+                        "vendor_id": 7805
+                    },
+                    "ignore_vendor_events": true,
+                    "mouse_discard_horizontal_wheel": true
+                },
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 11403,
+                        "vendor_id": 7805
+                    },
+                    "ignore": false,
+                    "mouse_discard_horizontal_wheel": true
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 34304,
+                        "vendor_id": 1452
+                    },
+                    "ignore": true
+                }
+            ],
+            "fn_function_keys": [
+                {
+                    "from": {
+                        "key_code": "f1"
+                    },
+                    "to": [
+                        {
+                            "key_code": "vk_none"
+                        }
+                    ]
+                },
+                {
+                    "from": {
+                        "key_code": "f4"
+                    },
+                    "to": [
+                        {
+                            "consumer_key_code": "dictation"
+                        }
+                    ]
+                },
+                {
+                    "from": {
+                        "key_code": "f5"
+                    },
+                    "to": [
+                        {
+                            "apple_vendor_keyboard_key_code": "spotlight"
+                        }
+                    ]
+                },
+                {
+                    "from": {
+                        "key_code": "f6"
+                    },
+                    "to": [
+                        {
+                            "key_code": "fn"
+                        }
+                    ]
+                }
+            ],
+            "name": "Default profile",
+            "selected": true,
+            "simple_modifications": [
+                {
+                    "from": {
+                        "key_code": "end"
+                    },
+                    "to": [
+                        {
+                            "key_code": "fn"
+                        }
+                    ]
+                }
+            ],
+            "virtual_hid_keyboard": {
+                "keyboard_type_v2": "iso"
+            }
+        }
+    ]
+}

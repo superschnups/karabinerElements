@@ -1,0 +1,85 @@
+{
+  "title": "Fensterpositionierung (Hälften & Zentriert)",
+  "rules": [
+    {
+      "description": "Cmd+Option+Links → Fenster linke Bildschirmhälfte",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_arrow",
+            "modifiers": {
+              "mandatory": ["left_command", "left_option"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -l JavaScript -e \"ObjC.import('Cocoa'); var se = Application('System Events'); var vf = \\$.NSScreen.mainScreen.visibleFrame; var ff = \\$.NSScreen.mainScreen.frame; var x = vf.origin.x; var y = ff.size.height - (vf.origin.y + vf.size.height); var w = vf.size.width; var h = vf.size.height; var app = se.applicationProcesses.where({frontmost:true})[0]; var win = app.windows[0]; win.position = [x, y]; win.size = [w/2, h];\""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Cmd+Option+Rechts → Fenster rechte Bildschirmhälfte",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_arrow",
+            "modifiers": {
+              "mandatory": ["left_command", "left_option"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -l JavaScript -e \"ObjC.import('Cocoa'); var se = Application('System Events'); var vf = \\$.NSScreen.mainScreen.visibleFrame; var ff = \\$.NSScreen.mainScreen.frame; var x = vf.origin.x; var y = ff.size.height - (vf.origin.y + vf.size.height); var w = vf.size.width; var h = vf.size.height; var app = se.applicationProcesses.where({frontmost:true})[0]; var win = app.windows[0]; win.position = [x + w/2, y]; win.size = [w/2, h];\""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Cmd+Option+C → Fenster zentriert, 80% Größe",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "mandatory": ["left_command", "left_option"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -l JavaScript -e \"ObjC.import('Cocoa'); var se = Application('System Events'); var vf = \\$.NSScreen.mainScreen.visibleFrame; var ff = \\$.NSScreen.mainScreen.frame; var x = vf.origin.x; var y = ff.size.height - (vf.origin.y + vf.size.height); var w = vf.size.width; var h = vf.size.height; var scale = 0.8; var nw = w * scale; var nh = h * scale; var app = se.applicationProcesses.where({frontmost:true})[0]; var win = app.windows[0]; win.position = [x + (w - nw)/2, y + (h - nh)/2]; win.size = [nw, nh];\""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Cmd+Option+Shift+C → Fenster zentriert, 50% Größe",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "mandatory": ["left_command", "left_option", "left_shift"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -l JavaScript -e \"ObjC.import('Cocoa'); var se = Application('System Events'); var vf = \\$.NSScreen.mainScreen.visibleFrame; var ff = \\$.NSScreen.mainScreen.frame; var x = vf.origin.x; var y = ff.size.height - (vf.origin.y + vf.size.height); var w = vf.size.width; var h = vf.size.height; var scale = 0.5; var nw = w * scale; var nh = h * scale; var app = se.applicationProcesses.where({frontmost:true})[0]; var win = app.windows[0]; win.position = [x + (w - nw)/2, y + (h - nh)/2]; win.size = [nw, nh];\""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

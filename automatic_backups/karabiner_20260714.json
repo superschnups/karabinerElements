@@ -1,0 +1,163 @@
+{
+    "global": { "filter_useless_events_from_specific_devices": false },
+    "machine_specific": { "krbn-91930a27-b0bb-4df7-9805-eb1a16e14632": { "external_editor_path": "/Applications/Visual Studio Code.app" } },
+    "profiles": [
+        {
+            "complex_modifications": {
+                "rules": [
+                    { "eval_js": "// JavaScript must be written in ECMAScript 5.1.\n\nfunction main() {\n  const apps = [\n    { key_code: '1', app: 'com.apple.Safari' },\n    { key_code: '2', app: 'com.apple.TextEdit' },\n    { key_code: '3', app: 'com.apple.ActivityMonitor' },\n  ]\n\n  const manipulators = []\n  for (var i = 0; i < apps.length; ++i) {\n    const app = apps[i]\n\n    console.log('right_shift+' + app.key_code + ' to ' + app.app)\n\n    manipulators.push({\n      type: 'basic',\n      from: {\n        key_code: app.key_code,\n        modifiers: {\n          mandatory: ['right_shift'],\n        },\n      },\n      to: [\n        {\n          software_function: {\n            open_application: { bundle_identifier: app.app },\n          },\n        },\n      ],\n    })\n  }\n\n  return {\n    description: 'Open apps with right_shift+1/2/3',\n    manipulators: manipulators,\n  }\n}\n\nmain()\n" },
+                    {
+                        "description": "This rule solves a problem with the Microsoft Surface Ergonomic Keyboard. The `Fn` key can't be used to start dictation, since it only toggles an internal state on and off, and it does not actually send any keypress event. This rule allows you to start dictation by double tapping the keypad enter key, which will send Fn twice. If you only press the keypad enter key once, it will send the original enter key after a short delay (250ms).",
+                        "enabled": false,
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "keypad_enter pressed",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "keypad_enter",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "fn" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "keypad_enter",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "parameters": { "basic.to_delayed_action_delay_milliseconds": 250 },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "keypad_enter pressed",
+                                            "value": 1
+                                        }
+                                    },
+                                    { "key_code": "fn" }
+                                ],
+                                "to_delayed_action": {
+                                    "to_if_canceled": [
+                                        {
+                                            "set_variable": {
+                                                "name": "keypad_enter pressed",
+                                                "value": 0
+                                            }
+                                        }
+                                    ],
+                                    "to_if_invoked": [
+                                        {
+                                            "set_variable": {
+                                                "name": "keypad_enter pressed",
+                                                "value": 0
+                                            }
+                                        },
+                                        { "key_code": "keypad_enter" }
+                                    ]
+                                },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "enabled": false,
+                        "manipulators": [
+                            {
+                                "description": "Change caps_lock to command+control+option+shift.",
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_command", "left_control", "left_option"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "devices": [
+                {
+                    "fn_function_keys": [
+                        {
+                            "from": { "key_code": "f1" },
+                            "to": [{ "consumer_key_code": "dictation" }]
+                        }
+                    ],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 13330,
+                        "vendor_id": 14
+                    },
+                    "ignore_vendor_events": true,
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "right_control" },
+                            "to": [{ "apple_vendor_top_case_key_code": "keyboard_fn" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 64112,
+                        "vendor_id": 9639
+                    },
+                    "ignore_vendor_events": true
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 11403,
+                        "vendor_id": 7805
+                    },
+                    "ignore_vendor_events": true
+                },
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 11403,
+                        "vendor_id": 7805
+                    },
+                    "ignore_vendor_events": true
+                }
+            ],
+            "fn_function_keys": [
+                {
+                    "from": { "key_code": "f1" },
+                    "to": [{ "consumer_key_code": "al_local_machine_browser" }]
+                },
+                {
+                    "from": { "key_code": "f4" },
+                    "to": [{ "consumer_key_code": "dictation" }]
+                },
+                {
+                    "from": { "key_code": "f5" },
+                    "to": [{ "apple_vendor_keyboard_key_code": "spotlight" }]
+                },
+                {
+                    "from": { "key_code": "f6" },
+                    "to": [{ "key_code": "fn" }]
+                }
+            ],
+            "name": "Default profile",
+            "selected": true,
+            "simple_modifications": [
+                {
+                    "from": { "key_code": "end" },
+                    "to": [{ "key_code": "fn" }]
+                }
+            ],
+            "virtual_hid_keyboard": { "keyboard_type_v2": "iso" }
+        }
+    ]
+}
